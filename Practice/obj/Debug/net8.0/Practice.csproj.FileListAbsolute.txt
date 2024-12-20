@@ -208,3 +208,4 @@ C:\Users\tyagaev-a\Desktop\Practice\Practice\obj\Debug\net8.0\refint\Practice.dl
 C:\Users\tyagaev-a\Desktop\Practice\Practice\obj\Debug\net8.0\Practice.pdb
 C:\Users\tyagaev-a\Desktop\Practice\Practice\obj\Debug\net8.0\Practice.genruntimeconfig.cache
 C:\Users\tyagaev-a\Desktop\Practice\Practice\obj\Debug\net8.0\ref\Practice.dll
+C:\Users\tyagaev-a\Desktop\Practice\Practice\obj\Debug\net8.0\Practice.sourcelink.json
