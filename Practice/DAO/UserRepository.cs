@@ -3,7 +3,7 @@ using Practice.Models;
 
 namespace Practice.DAO;
 
-public class UserRepository
+public class UserRepository : IUserRepository
 {
     private readonly DBContext _db;
 
@@ -12,56 +12,69 @@ public class UserRepository
         _db = db;
     }
 
-    public List<User> GetUsers()
+    public IQueryable<User> GetUsers()
     {
-        return _db.Users.ToList();
-    }
-    
-    public async Task<User> UpdateUser(User model)
-    {
-        var user = await _db.Users.Where(u => u.Id == model.Id).FirstOrDefaultAsync();
-        if (user != null)
-        {
-            if (!string.IsNullOrEmpty(user.FirstName))
-                user.FirstName = model.FirstName;
-            if (!string.IsNullOrEmpty(user.LastName))
-                user.LastName = model.LastName;
-            if (!string.IsNullOrEmpty(user.MiddleName))
-                user.MiddleName = model.MiddleName;
-            if (!string.IsNullOrEmpty(user.FirstName))
-                user.FirstName = model.FirstName;
-            if (!string.IsNullOrEmpty(user.PhoneNumber))
-                user.PhoneNumber = model.PhoneNumber;
-            if (!string.IsNullOrEmpty(user.Passport))
-                user.Passport = model.Passport;
-            _db.Users.Update(user);
-            await _db.SaveChangesAsync();
-        }
-        return user!;
+        return _db.Users.AsQueryable();
     }
 
-    public async Task<User> AddUser(string firstName, string lastName, string middleName, string phoneNumber, string passport)
+    public User GetUserById(long id)
     {
-        var user = new User
-        {
-            FirstName = firstName,
-            LastName = lastName,
-            MiddleName = middleName,
-            PhoneNumber = phoneNumber,
-            Passport = passport
-        };
+        var user = _db.Users.FirstOrDefault(u => u.Id == id);
+        return user;
+    }
+
+    public async Task<User> AddUser(User user)
+    {
         _db.Users.Add(user);
         await _db.SaveChangesAsync();
         return user;
     }
-
-    public async Task DeleteUser(long id)
-    {
-        var user = await _db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
-        if (user != null)
-        {
-            _db.Users.Remove(user);
-            await _db.SaveChangesAsync();
-        }
-    }
+    
+    // public async Task<User> UpdateUser(User model)
+    // {
+    //     var user = await _db.Users.Where(u => u.Id == model.Id).FirstOrDefaultAsync();
+    //     if (user != null)
+    //     {
+    //         if (!string.IsNullOrEmpty(user.FirstName))
+    //             user.FirstName = model.FirstName;
+    //         if (!string.IsNullOrEmpty(user.LastName))
+    //             user.LastName = model.LastName;
+    //         if (!string.IsNullOrEmpty(user.MiddleName))
+    //             user.MiddleName = model.MiddleName;
+    //         if (!string.IsNullOrEmpty(user.FirstName))
+    //             user.FirstName = model.FirstName;
+    //         if (!string.IsNullOrEmpty(user.PhoneNumber))
+    //             user.PhoneNumber = model.PhoneNumber;
+    //         if (!string.IsNullOrEmpty(user.Passport))
+    //             user.Passport = model.Passport;
+    //         _db.Users.Update(user);
+    //         await _db.SaveChangesAsync();
+    //     }
+    //     return user!;
+    // }
+    //
+    // public async Task<User> AddUser(string firstName, string lastName, string middleName, string phoneNumber, string passport)
+    // {
+    //     var user = new User
+    //     {
+    //         FirstName = firstName,
+    //         LastName = lastName,
+    //         MiddleName = middleName,
+    //         PhoneNumber = phoneNumber,
+    //         Passport = passport
+    //     };
+    //     _db.Users.Add(user);
+    //     await _db.SaveChangesAsync();
+    //     return user;
+    // }
+    //
+    // public async Task DeleteUser(long id)
+    // {
+    //     var user = await _db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
+    //     if (user != null)
+    //     {
+    //         _db.Users.Remove(user);
+    //         await _db.SaveChangesAsync();
+    //     }
+    // }
 }

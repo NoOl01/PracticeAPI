@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tyagaev-a\\Desktop\\Practice\\Practice\\Practice.csproj": {}
+    "C:\\Users\\tyagaev-a\\Desktop\\PracticeAPI\\Practice\\Practice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tyagaev-a\\Desktop\\Practice\\Practice\\Practice.csproj": {
+    "C:\\Users\\tyagaev-a\\Desktop\\PracticeAPI\\Practice\\Practice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tyagaev-a\\Desktop\\Practice\\Practice\\Practice.csproj",
+        "projectUniqueName": "C:\\Users\\tyagaev-a\\Desktop\\PracticeAPI\\Practice\\Practice.csproj",
         "projectName": "Practice",
-        "projectPath": "C:\\Users\\tyagaev-a\\Desktop\\Practice\\Practice\\Practice.csproj",
+        "projectPath": "C:\\Users\\tyagaev-a\\Desktop\\PracticeAPI\\Practice\\Practice.csproj",
         "packagesPath": "C:\\Users\\tyagaev-a\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tyagaev-a\\Desktop\\Practice\\Practice\\obj\\",
+        "outputPath": "C:\\Users\\tyagaev-a\\Desktop\\PracticeAPI\\Practice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

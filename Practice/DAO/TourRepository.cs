@@ -5,7 +5,7 @@ using Practice.Models;
 
 namespace Practice.DAO;
 
-public class TourRepository
+public class TourRepository : ITourRepository
 {
     private readonly DBContext _db;
 
@@ -14,64 +14,22 @@ public class TourRepository
         _db = db;
     }
 
-    public List<Tour> GetAllToursOnly()
+
+    public IQueryable<Tour> GetTours()
     {
-        return _db.Tours.ToList();
+        return _db.Tours.AsQueryable();
     }
 
-    public List<Tour> GetAllToursWithUsers()
+    public Tour GetTourById(long id)
     {
-        return _db.Tours.Include(u => u.User).ToList();
-    }
-
-    public List<Tour> GetAllToursWithServices()
-    {
-        return _db.Tours.Include(s => s.Services).ToList();
-    }
-
-    public List<Tour> GetAllToursWithUserAndServices()
-    {
-        return _db.Tours.Include(u => u.User).Include(s => s.Services).ToList();
-    }
-
-    public async Task<Tour> UpdateTour(Tour model)
-    {
-        var tour = await _db.Tours.Where(u => u.Id == model.Id).FirstOrDefaultAsync();
-        if (tour != null)
-        {
-            if (!string.IsNullOrEmpty(tour.Country))
-                tour.Country = model.Country;
-            if (tour.ServiceId != 0)
-                tour.ServiceId = model.ServiceId;
-            if (tour.UserId != 0)
-                tour.UserId = model.UserId;
-            tour.Date = DateTime.Now;
-            _db.Tours.Update(tour);
-            await _db.SaveChangesAsync();
-        }
-        return tour!;
-    }
-
-    public async Task<Tour> AddTour(string country, long serviceId, long userId)
-    {
-        Tour tour = new Tour
-        {
-            Country = country,
-            ServiceId = serviceId,
-            UserId = userId,
-        };
-        _db.Tours.Add(tour);
-        await _db.SaveChangesAsync();
+        var tour = _db.Tours.FirstOrDefault(t => t.Id == id);
         return tour;
     }
 
-    public async Task DeleteTour(long id)
+    public async Task<Tour> AddTour(Tour tour)
     {
-        var tour = await _db.Tours.Where(u => u.Id == id).FirstOrDefaultAsync();
-        if (tour != null)
-        {
-            _db.Tours.Remove(tour);
-            await _db.SaveChangesAsync();
-        }
+        _db.Tours.Add(tour);
+        await _db.SaveChangesAsync();
+        return tour;
     }
 }
