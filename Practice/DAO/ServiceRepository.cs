@@ -17,10 +17,10 @@ public class ServiceRepository : IServiceRepository
         return _db.Services.AsQueryable();
     }
 
-    public Service? GetServiceById(long id)
+    public async Task<Service> GetServiceById(long id)
     {
-        var services = _db.Services.FirstOrDefault(s => s.Id == id);
-        return services;
+        var service = await _db.Services.FirstOrDefaultAsync(s => s.Id == id);
+        return service;
     }
 
     public async Task<Service?> AddService(Service service)

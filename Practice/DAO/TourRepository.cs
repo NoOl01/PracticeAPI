@@ -20,9 +20,9 @@ public class TourRepository : ITourRepository
         return _db.Tours.AsQueryable();
     }
 
-    public Tour GetTourById(long id)
+    public async Task<Tour> GetTourById(long id)
     {
-        var tour = _db.Tours.FirstOrDefault(t => t.Id == id);
+        var tour = await _db.Tours.FirstOrDefaultAsync(t => t.Id == id);
         return tour;
     }
 

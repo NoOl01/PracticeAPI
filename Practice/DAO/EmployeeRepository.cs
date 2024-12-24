@@ -19,9 +19,9 @@ public class EmployeeRepository : IEmployeeRepository
         return _db.Employees.AsQueryable();
     }
 
-    public Employee GetEmployeeById(long id)
+    public async Task<Employee> GetEmployeeById(long id)
     {
-        var emp = _db.Employees.FirstOrDefault(e => e.Id == id);
+        var emp = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
         return emp;
     }
 

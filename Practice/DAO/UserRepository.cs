@@ -17,9 +17,9 @@ public class UserRepository : IUserRepository
         return _db.Users.AsQueryable();
     }
 
-    public User GetUserById(long id)
+    public async Task<User> GetUserById(long id)
     {
-        var user = _db.Users.FirstOrDefault(u => u.Id == id);
+        var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == id);
         return user;
     }
 
