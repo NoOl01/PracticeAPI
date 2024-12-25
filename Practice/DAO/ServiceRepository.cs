@@ -29,4 +29,15 @@ public class ServiceRepository : IServiceRepository
         await _db.SaveChangesAsync();
         return service;
     }
+
+    public async Task<decimal> CalculateCost(List<Service> service)
+    {
+        decimal cost = 0;
+        foreach (var i in service)
+        {
+            cost += i.Price;
+        }
+
+        return cost;
+    }
 }

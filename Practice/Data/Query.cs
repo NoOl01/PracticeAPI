@@ -1,4 +1,5 @@
-﻿using Practice.DAO;
+﻿using Microsoft.EntityFrameworkCore;
+using Practice.DAO;
 using Practice.Models;
 
 namespace Practice.Data;
@@ -48,5 +49,12 @@ public class Query
     {
         Tour tour = await rep.GetTourById(id);
         return tour;
+    }
+
+    [UseProjection]
+    public async Task<Decimal> CalculateCost([Service] IServiceRepository rep, List<Service> services)
+    {
+        var cost = await rep.CalculateCost(services);
+        return cost;
     }
 }
